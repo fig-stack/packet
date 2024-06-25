@@ -1,5 +1,5 @@
 # Packet
-Updated version of sniffex (https://www.tcpdump.org/pcap.html) (simple packet sniffer).
+Updated version of sniffex (https://www.tcpdump.org/pcap.html).
 
 
 # Supported Protocols
