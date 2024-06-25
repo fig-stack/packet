@@ -13,13 +13,14 @@ IP
 # How to use
 Compile example
 ```bash
-gcc -Wall -g -O0 -lpcap -o main main.c
+fig@machine:~$ gcc -Wall -g -O0 -lpcap -o main main.c
 ```
                                                                                                                           
 > Requires root access for sniffing, so run it as sudo.
 
 ```bash
-sudo ./main                                                                                                                                     [0] en0 (No description available)
+fig@machine:~$ sudo ./main
+[0] en0 (No description available)
 [1] awdl0 (No description available)
 [2] llw0 (No description available)
 [3] utun0 (No description available)
