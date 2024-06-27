@@ -1,7 +1,6 @@
 # Stiff
 Updated version of sniffex (https://www.tcpdump.org/pcap.html).
 
-
 # Supported Protocols
 ```
 TCP
@@ -42,6 +41,10 @@ fig@machine:~$ sudo ./main
 [19] stf0 (No description available)
 Which device do you want to sniff? (0 to 19):
 ```
+# Future Updates
+- [ ] Refactor some of the code to modern standards.
+- [ ] Add the usage of CLA (-p ...;; so the user can set up stuff before executing)
+- [ ] Make a small interface.
 
 # Disclaimer
 This was only written to update an already existing packet sniffer mentioned in the header. It's in the early stages of development and may not receive updates further on (i'm a new C programmer so any tips are welcome :)).
