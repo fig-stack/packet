@@ -1,4 +1,4 @@
-# Packet
+# Stiff
 Updated version of sniffex (https://www.tcpdump.org/pcap.html).
 
 
