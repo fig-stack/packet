@@ -1,5 +1,6 @@
 #include <arpa/inet.h>
 #include <ctype.h>
+#include <unistd.h>
 #include <errno.h>
 #include <netinet/in.h>
 #include <pcap.h>
@@ -260,21 +261,40 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
     return;
 }
 
-int main(int argc, char **argv) {
+void graphical() {
+  printf("[!] Welcome to STIFF!\n");
+  sleep(1);
+  printf("Usage: sudo ./stiff <number_of_packets>\n\n");
+  sleep(1);
+  printf("|-|-| Available Interfaces |-|-|\n");
+  sleep(1);
+}
+
+int main(int argc, char *argv[1]) {
     char errbuf[PCAP_ERRBUF_SIZE]; /* error buffer */
     pcap_t *handle = NULL;
     pcap_if_t *alldevs;
     pcap_if_t *dev;
-
     char input[99];
     char filter_exp[] = "ip"; /* filter expression [3] */
     struct bpf_program fp;    /* compiled filter program (expression) */
-    bpf_u_int32 mask = 0;     /* subnet mask */
-    bpf_u_int32 net = 0;      /* ip */
-    int num_packets = 10;
+    int num_packets;
 
     int choice;
     int dev_index = 0;
+
+    if (argc != 2) {
+        fprintf(stderr, "Usage: sudo %s <number of packets>\n", argv[0]);
+        return 1;
+    }
+
+    num_packets = atoi(argv[1]);
+    if (num_packets <= 0) {
+        fprintf(stderr, "Error: Number of packets must be a positive integer.\n");
+        return 1;
+    }
+
+    graphical();
 
     if (pcap_findalldevs(&alldevs, errbuf) == -1) {
         fprintf(stderr, "Couldn't open device: %s\n", errbuf);
@@ -283,17 +303,11 @@ int main(int argc, char **argv) {
 
     /* search through all devices and print them */
     for (dev = alldevs; dev; dev = dev->next) {
-        printf("[%d] %s ", dev_index, dev->name);
-        if (dev->description != NULL) {
-            printf("(%s)", dev->description);
-        } else {
-            printf("(No description available)");
-        }
-        printf("\n");
+        printf("[%d] %s\n", dev_index, dev->name);
         dev_index++;
     }
 
-
+    sleep(1);
     /* ask the user for which device to sniff on */
     while (1) {
         printf("Which device do you want to sniff? (0 to %d): ", dev_index - 1);
@@ -316,9 +330,9 @@ int main(int argc, char **argv) {
     /* after the loop ends, dev points to the device the user chose */
     dev = alldevs;
     for (int i = 0; i < choice; i++) {
-      if (dev->next != NULL) {
-        dev = dev->next;
-      }
+        if (dev->next != NULL) {
+            dev = dev->next;
+        }
     }
 
     /* create the handle for the device */
@@ -342,7 +356,7 @@ int main(int argc, char **argv) {
     }
 
     /* compile the filter expression */
-    if (pcap_compile(handle, &fp, filter_exp, 0, net) == -1) {
+    if (pcap_compile(handle, &fp, filter_exp, 0, 0) == -1) {
         fprintf(stderr, "Couldn't parse filter %s: %s\n", filter_exp,
                 pcap_geterr(handle));
         exit(EXIT_FAILURE);
