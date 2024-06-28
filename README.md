@@ -1,4 +1,4 @@
-# Stiff
+# STIFF
 Updated version of sniffex (https://www.tcpdump.org/pcap.html).
 
 # Supported Protocols
@@ -10,41 +10,16 @@ IP
 ```
 
 # How to use
-Compile example
 ```bash
-fig@machine:~$ gcc -Wall -g -O0 -lpcap -o main main.c
-```
-                                                                                                                          
-> Requires root access for sniffing, so run it as sudo.
+fig@machine:~$ make
+fig@machine:~$ sudo ./stiff <number_of_packets>
 
-```bash
-fig@machine:~$ sudo ./main
-[0] en0 (No description available)
-[1] awdl0 (No description available)
-[2] llw0 (No description available)
-[3] utun0 (No description available)
-[4] utun1 (No description available)
-[5] utun2 (No description available)
-[6] utun3 (No description available)
-[7] utun4 (No description available)
-[8] utun5 (No description available)
-[9] lo0 (No description available)
-[10] anpi0 (No description available)
-[11] anpi1 (No description available)
-[12] en3 (No description available)
-[13] en4 (No description available)
-[14] en1 (No description available)
-[15] en2 (No description available)
-[16] bridge0 (No description available)
-[17] ap1 (No description available)
-[18] gif0 (No description available)
-[19] stf0 (No description available)
-Which device do you want to sniff? (0 to 19):
-```
+```                                                                                                                       
+
+<img width="366" alt="image" src="https://github.com/fig-stack/stiff/assets/115978760/ed436798-ec92-4884-814d-7c6134b70fa1">
+
 # Future Updates
-- [ ] Refactor some of the code to modern standards.
-- [ ] Add the usage of CLA (-p ...;; so the user can set up stuff before executing)
-- [ ] Make a small interface.
+- [ ] Add more protocols.
 
 # Disclaimer
-This was only written to update an already existing packet sniffer mentioned in the header. It's in the early stages of development and may not receive updates further on (i'm a new C programmer so any tips are welcome :)).
+This was only written to update an already existing packet sniffer mentioned in the header. It's in the early stages of development and may not receive updates further on (I'm a new C programmer so any tips are welcome).
